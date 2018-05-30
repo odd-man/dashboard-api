@@ -197,9 +197,6 @@ const (
 	// used for show clause
 	RequestWithExpression = "withExp"
 
-	// RequestSQL the sql field in request
+	// RequestSQL the sql or sql array field in request
 	RequestSQL = "sql"
-
-	// RequestSQLs the sql array field in request
-	RequestSQLs = "sqls"
 )

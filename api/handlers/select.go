@@ -22,39 +22,13 @@ import (
 	"github.com/seeleteam/dashboard-api/db/query/param"
 )
 
-// SelectBySQL get data from influxdb by influxdb sql
-func SelectBySQL() gin.HandlerFunc {
+// SelectBySQLs get data from influxdb by multi influxdb sql
+func SelectBySQLs() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		sql := c.Query(common.RequestSQL)
-		if sql == "" {
-			errInfo := fmt.Sprintf("param field sql required!")
-			log.Error(errInfo)
-			responseData := common.NewResponseData(500, errors.New(errInfo), nil, c.Request.RequestURI)
-			ResponseJSON(c, responseData)
-			return
-		}
-		query := origin.New(sql)
-		log.Debug("stmt: %v", query.Stmt)
-
-		res, err := query.Query()
-		if err != nil {
-			log.Error("SelectBySQL, err:\n%v\n")
-			responseData := common.NewResponseData(500, err, res, c.Request.RequestURI)
-			ResponseJSON(c, responseData)
-			return
-		}
-		responseData := common.NewResponseData(200, nil, res, c.Request.RequestURI)
-		ResponseJSON(c, responseData)
-	}
-}
-
-// SelectByMultiSQL get data from influxdb by multi influxdb sql
-func SelectByMultiSQL() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		sqls := c.QueryArray(common.RequestSQLs)
+		sqls := c.QueryArray(common.RequestSQL)
 
 		if sqls == nil || len(sqls) == 0 {
-			errInfo := fmt.Sprintf("param field sqls required!")
+			errInfo := fmt.Sprintf("param field sql(array) required!")
 			log.Error(errInfo)
 			responseData := common.NewResponseData(400, errors.New(errInfo), nil, c.Request.RequestURI)
 			ResponseJSON(c, responseData)
@@ -85,7 +59,7 @@ func SelectByMultiSQL() gin.HandlerFunc {
 
 		res, err := query.Query()
 		if err != nil {
-			log.Error("SelectByMultiSQL, err:\n%v\n")
+			log.Error("SelectBySQLs, err:\n%v\n")
 			responseData := common.NewResponseData(500, err, res, c.Request.RequestURI)
 			ResponseJSON(c, responseData)
 			return

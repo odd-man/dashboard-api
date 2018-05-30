@@ -19,13 +19,9 @@ func InitRouters(e *gin.Engine) {
 
 	// routerGroup API
 	routerGroupAPI := e.Group("/api")
-	// base
-	routerGroupAPI.GET("/ping", handlers.Ping())
 
 	apiShowGroup := routerGroupAPI.Group("/show")
 	apiShowGroup.GET("/databases", handlers.ShowDatabases())
-	apiShowGroup.GET("/retentionPolices", handlers.ShowRetentionPolices())
-	apiShowGroup.GET("/series", handlers.ShowSeries())
 	apiShowGroup.GET("/measurements", handlers.ShowMeasurements())
 	apiShowGroup.GET("/tagKeys", handlers.ShowTagKeys())
 	apiShowGroup.GET("/tagValues", handlers.ShowTagValues())
@@ -33,8 +29,7 @@ func InitRouters(e *gin.Engine) {
 
 	// base sql in group api
 	apiSelectGroup := routerGroupAPI.Group("/query")
-	apiSelectGroup.GET("/sql", handlers.SelectBySQL())
-	apiSelectGroup.GET("/multiSql", handlers.SelectByMultiSQL())
+	apiSelectGroup.GET("/sqls", handlers.SelectBySQLs())
 	apiSelectGroup.GET("/params", handlers.SelectWithParams())
 
 }
