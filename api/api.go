@@ -6,23 +6,10 @@
 package api
 
 import (
-	"errors"
-	"sync"
-
 	"golang.org/x/sync/errgroup"
 
 	"github.com/seeleteam/dashboard-api/common"
 	"github.com/seeleteam/dashboard-api/log"
-)
-
-// error infos
-var (
-	ErrConfigIsNull       = errors.New("config info is null")
-	ErrLogIsNull          = errors.New("APILogs is null")
-	ErrNodeRunning        = errors.New("API is already running")
-	ErrNodeStopped        = errors.New("API is not started")
-	ErrServiceStartFailed = errors.New("API service start failed")
-	ErrServiceStopFailed  = errors.New("API service stop failed")
 )
 
 var (
@@ -31,11 +18,8 @@ var (
 
 // API api server config
 type API struct {
-	config *Config
-
-	log  *log.GlobalLog
-	lock sync.RWMutex
-
+	config     *Config
+	log        *log.GlobalLog
 	ErrorGroup *errgroup.Group
 }
 
@@ -52,9 +36,6 @@ func New(conf *Config) (*API, error) {
 
 // Start start the api server
 func (api *API) Start() error {
-	api.lock.Lock()
-	defer api.lock.Unlock()
-
 	//run server with config and logs
 	server := GetServer(api)
 	server.Run()

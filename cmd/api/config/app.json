@@ -1,21 +1,11 @@
 {
-    "Name": "dashboard api",
+    "Name": "dashboard-api",
     "Version": "1.0",
     "ListenAddr": "0.0.0.0:40404",
     "LogLevel":"debug",
     "DisableConsoleColor":true,
     "PrintLog":true,
     "WriteLog":true,
-    "HTTPCors": [
-      "*"
-    ],
-    "HTTPWhiteHost": [
-      "*"
-    ],
-    "EnableWebSocket":false,
-    "EnableGraceful":false,
-    "DefaultHammerTime":30,
-    "WebSocketURL":"/api",
     "LimitConnection":0,
     "RunMode":"debug",
     "RootRouterPrefix":"/api/v1",

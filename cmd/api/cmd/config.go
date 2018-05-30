@@ -70,14 +70,6 @@ func LoadConfigFromFile(configFile string) (*api.Config, error) {
 	apiConfig.Version = config.Version
 
 	apiConfig.ListenAddr = config.ListenAddr
-	apiConfig.HTTPCors = config.HTTPCors
-	apiConfig.HTTPWhiteHost = config.HTTPWhiteHost
-
-	apiConfig.EnableGraceful = config.EnableGraceful
-	apiConfig.DefaultHammerTime = config.DefaultHammerTime
-
-	apiConfig.EnableWebSocket = config.EnableWebSocket
-	apiConfig.WebSocketURL = config.WebSocketURL
 
 	runMode := config.RunMode
 	if runMode != gin.ReleaseMode && runMode != gin.DebugMode && runMode != gin.TestMode {
@@ -87,13 +79,6 @@ func LoadConfigFromFile(configFile string) (*api.Config, error) {
 
 	apiConfig.LimitConnection = config.LimitConnection
 	apiConfig.RootRouterPrefix = config.RootRouterPrefix
-
-	// https config
-	apiConfig.EnableHTTPS = config.EnableHTTPS
-	apiConfig.HTTPSAddr = config.HTTPSAddr
-
-	apiConfig.CertFile = config.CertFile
-	apiConfig.KeyFile = config.KeyFile
 
 	// server config
 	serverConfig := config.ServerConfig

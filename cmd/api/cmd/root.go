@@ -17,9 +17,6 @@ var rootCmd = &cobra.Command{
 	Use:   "api",
 	Short: "api command for starting the api",
 	Long:  `use "api help [<command>]" for detailed usage`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
